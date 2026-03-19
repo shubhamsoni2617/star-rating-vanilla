@@ -6,7 +6,11 @@
   </head>
 
   <body>
-    <div id="app"></div>
+    <form onsubmit="alert('Rating Submitted = ' + document.getElementById('rating').value)">
+      <div id="app"></div>
+      <input type="hidden" id="rating" value=""></input>
+      <button type="submit">Submit</button>
+    </form>
     <script src="./index.mjs" type="module"></script>
   </body>
 </html>

@@ -12,14 +12,18 @@
 
 import "./styles.css";
 
-let starHtml = Array(5)
+let starHtml = Array(6)
   .fill("")
-  .map((el, idx) => {
+  .map((_, idx) => {
     return `<div class="star" id="${idx + 1}"></div>`;
   })
   .join("");
 
-document.getElementById("app").innerHTML = starHtml;
+let rootElememt = document.getElementById("app");
+
+rootElememt.innerHTML = starHtml;
+
+// document.getElementById("app").innerHTML.add(`<p>ddd</p>`);
 
 let allStars = document.querySelectorAll(".star");
 // let hoveredStarId = null;
@@ -33,6 +37,15 @@ let handleHighlightStars = (hoveredStarId, isAddClass) => {
   });
 };
 
+let handleClickStars = (clickedStarId) => {
+  allStars.forEach((star, idx) => {
+    star.classList.remove("gold-star");
+    if (idx < clickedStarId) {
+      star.classList.add("gold-star");
+    }
+  });
+};
+
 allStars.forEach((star) => {
   star.addEventListener("mouseover", (event) => {
     handleHighlightStars(event.target.id, true);
@@ -41,5 +54,11 @@ allStars.forEach((star) => {
   star.addEventListener("mouseleave", (event) => {
     console.log(event);
     handleHighlightStars(event.target.id, false);
+  });
+
+  star.addEventListener("click", (event) => {
+    document.getElementById("rating").value = event.target.id;
+    handleClickStars(event.target.id);
+    console.log(event.target);
   });
 });
